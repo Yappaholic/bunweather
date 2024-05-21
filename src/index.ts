@@ -1,3 +1,4 @@
+import "./dom.ts";
 function getInfo(city: string, time: string, day: number) {
   const body = "http://api.weatherapi.com/v1/";
   const key = "?key=eb62870811bb4ef184491055242105";
@@ -42,4 +43,4 @@ async function getWeather(city: string, time: string, ...args: number[]) {
     console.log(err);
   }
 }
-getWeather("Minsk", "Future", 3);
+getWeather("Minsk", "Now");

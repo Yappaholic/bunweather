@@ -8,7 +8,23 @@
   <title>Document</title>
 </head>
 <body>
-  <h1>Hello</h1>
-  
+  <div class="header">
+    <h3>BunWeather</h3>
+  </div>
+  <div class="main">
+    <div class="content">
+      <p>Get your weather info</p>
+      <form>
+        <label for="city">Name of the city</label>
+        <input type="text" name="city" id="city" required>
+        <label for="time">What is the time of the weather?</label>
+        <select name="time" id="time">
+          <option value="Now">Now</option>
+          <option value="Future">Future</option>
+        </select>
+      </form>
+      <button type="submit">Search</button>
+    </div>
+  </div>
 </body>
 </html>
