@@ -1,0 +1,17 @@
+{
+  "name": "bunweather",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "scripts": {
+    "js": "bun run bun.config.js"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "bun-plugin-html": "^2.0.0"
+  }
+}
