@@ -26,11 +26,7 @@ async function getWeather(city: string, time: string, ...args: number[]) {
         ];
         console.log(result);
       } else {
-        const result = [
-          response.location.name,
-          response.current.temp_c,
-          response.current.condition.text,
-        ];
+        const result = [response.location.name];
         const days: Object[] = [];
         response.forecast.forecastday.forEach((day: any) => {
           let date = day.date;
@@ -46,4 +42,4 @@ async function getWeather(city: string, time: string, ...args: number[]) {
     console.log(err);
   }
 }
-getWeather("Minsk", "Now");
+getWeather("Minsk", "Future", 3);
