@@ -1,4 +1,34 @@
+import { getWeather } from "./lib";
 const select = document.querySelector<HTMLSelectElement>("form>select");
+const search = document.querySelector<HTMLButtonElement>("button[submit]");
+const content = document.querySelector(".content");
+async function weatherCall(
+  city: string,
+  time: string,
+  day: string | undefined,
+) {
+  await getWeather(city, time, day).then((result) =>
+    displayCurrentWeather(result),
+  );
+}
+function clearContent(form: HTMLFormElement, button: HTMLButtonElement) {
+  content!.removeChild(form);
+  content!.removeChild(button);
+}
+function displayCurrentWeather(weather: any) {
+  const city = weather;
+  const temp = weather[2];
+  const feel = weather[3];
+  const cityText = document.createElement("h2");
+  const tempText = document.createElement("p");
+  const feelText = document.createElement("p");
+  cityText.textContent = city;
+  tempText.textContent = `Temperature: ${temp}`;
+  feelText.textContent = feel;
+  content!.appendChild(cityText);
+  content!.appendChild(tempText);
+  content!.appendChild(feelText);
+}
 select?.addEventListener("change", () => {
   if (select?.value === "Future") {
     const label = document.createElement("label");
@@ -7,6 +37,7 @@ select?.addEventListener("change", () => {
     label.textContent = "Number of days:";
     const form = document.querySelector("form");
     const selection = document.createElement("select");
+    selection.name = "day";
     selection.id = "day";
     const day1 = document.createElement("option");
     day1.value = "1";
@@ -31,4 +62,17 @@ select?.addEventListener("change", () => {
       form?.removeChild(select);
     }
   }
+});
+search?.addEventListener("click", (e) => {
+  e.preventDefault();
+  const form = document.querySelector("form")!;
+  const formData = new FormData(form);
+  let city = formData.get("city")!.toString();
+  let time = formData.get("time")!.toString();
+  let day: string | undefined;
+  if (time!.toString() === "Future") {
+    day = formData.get("day")?.toString();
+  }
+  clearContent(form, search);
+  weatherCall(city, time, day);
 });
