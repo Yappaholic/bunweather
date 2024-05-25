@@ -22,34 +22,48 @@ function clearContent(form: HTMLFormElement, button: HTMLButtonElement) {
 }
 
 function displayCurrentWeather(weather: any) {
+  console.log(weather);
   const city = weather[0] + ", " + weather[1];
   const temp = weather[2];
   const feel = weather[3];
+  const div = document.createElement("div");
+  const img = document.createElement("img");
+  div.classList.toggle("forecast");
+  img.src = "https:" + weather[4];
+  img.classList.toggle("image");
   const cityText = document.createElement("h2");
   const tempText = document.createElement("p");
   const feelText = document.createElement("p");
+  feelText.classList.toggle("temp");
   cityText.textContent = city;
-  tempText.textContent = `Temperature: ${temp}`;
+  tempText.textContent = `C°: ${temp}`;
   feelText.textContent = feel;
   content!.appendChild(cityText);
-  content!.appendChild(tempText);
-  content!.appendChild(feelText);
+  div.appendChild(tempText);
+  div.appendChild(feelText);
+  div.appendChild(img);
+  content!.appendChild(div);
 }
 function displayFutureWeather(weather: any) {
+  console.log(weather);
   const cityText = document.createElement("h2");
   cityText.textContent = weather[0];
   content!.appendChild(cityText);
   for (let i = 0; i < weather[1].length; i++) {
     const div = document.createElement("div");
     div.classList.toggle("forecast");
+    const img = document.createElement("img");
+    img.src = "https:" + weather[1][i].icon;
+    img.classList.toggle("image");
     const date = document.createElement("p");
     const temp = document.createElement("p");
     date.classList.toggle("date");
     temp.classList.toggle("temp");
-    date.textContent = weather[1][i].date;
-    temp.textContent = weather[1][i].temp;
+    date.textContent = weather[1][i].date.slice(5);
+    temp.textContent = `C°: ${weather[1][i].temp}`;
     div.appendChild(date);
     div.appendChild(temp);
+    div.appendChild(img);
     content!.appendChild(div);
   }
 }

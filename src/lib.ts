@@ -27,6 +27,7 @@ async function getWeather(
       weather.push(response.location.country);
       weather.push(response.current.temp_c);
       weather.push(response.current.condition.text);
+      weather.push(response.current.condition.icon);
     } else {
       weather.push(response.location.name);
       const days: Object[] = [];
@@ -34,7 +35,8 @@ async function getWeather(
         let date = day.date;
         let temp = day.day.avgtemp_c;
         let condition = day.day.condition.text;
-        days.push({ date, temp, condition });
+        let icon = day.day.condition.icon;
+        days.push({ date, temp, condition, icon });
       });
       weather.push(days);
     }
