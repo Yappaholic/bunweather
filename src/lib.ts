@@ -33,7 +33,7 @@ async function getWeather(
       const days: Object[] = [];
       response.forecast.forecastday.forEach((day: any) => {
         let date = day.date;
-        let temp = day.day.avgtemp_c;
+        let temp = day.day.maxtemp_c;
         let condition = day.day.condition.text;
         let icon = day.day.condition.icon;
         days.push({ date, temp, condition, icon });

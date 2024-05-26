@@ -2,6 +2,7 @@ import { getWeather } from "./lib";
 const select = document.querySelector<HTMLSelectElement>("form>select");
 const search = document.querySelector<HTMLButtonElement>("button[submit]");
 const content = document.querySelector(".content");
+const header = document.querySelector("[header]");
 async function weatherCall(
   city: string,
   time: string,
@@ -22,7 +23,6 @@ function clearContent(form: HTMLFormElement, button: HTMLButtonElement) {
 }
 
 function displayCurrentWeather(weather: any) {
-  console.log(weather);
   const city = weather[0] + ", " + weather[1];
   const temp = weather[2];
   const feel = weather[3];
@@ -34,6 +34,7 @@ function displayCurrentWeather(weather: any) {
   const cityText = document.createElement("h2");
   const tempText = document.createElement("p");
   const feelText = document.createElement("p");
+  header!.textContent = "You are looking weather for";
   feelText.classList.toggle("temp");
   cityText.textContent = city;
   tempText.textContent = `C°: ${temp}`;
